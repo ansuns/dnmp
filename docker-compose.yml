@@ -1,0 +1,17 @@
+mysql:
+    build: ./mysql
+    ports: ['3306:3306']
+    volumes: ['./mysql/data:/var/lib/mysql']
+    environment: {MYSQL_ROOT_PASSWORD: 123456}
+
+redis:
+    build: ./redis
+    ports:
+      - "6379:6379"
+
+nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./wwwroot/:/usr/local/html/
