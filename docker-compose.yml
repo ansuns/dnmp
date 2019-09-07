@@ -16,7 +16,7 @@ php73:
     expose:
       - "9000"
     volumes:
-      - ./wwwroot/:/usr/local/html/:rw
+      - ./wwwroot/:/var/www/html/:rw
       - ./php/php.ini:/usr/local/etc/php/php.ini:ro
       - ./php/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf:rw
       - ./php/log/php-fpm/:/var/log/php-fpm/:rw
@@ -31,7 +31,7 @@ nginx:
       - "80:80"
       - "443:443"
     volumes:
-      - ./wwwroot/:/usr/local/html/:rw
+      - ./wwwroot/:/var/www/html/:rw
     links:
       - "php73"
     restart: always
