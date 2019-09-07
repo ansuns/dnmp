@@ -1,38 +1,50 @@
-mysql:
-    build: ./mysql
-    ports: ['3306:3306']
-    volumes: ['./mysql/data:/var/lib/mysql']
-    environment: {MYSQL_ROOT_PASSWORD: 123456}
-    restart: always
+version: '3'
+services:
+    mysql:
+        build: ./mysql
+        ports: ['3306:3306']
+        volumes: ['./mysql/data:/var/lib/mysql']
+        environment: {MYSQL_ROOT_PASSWORD: 123456}
+        restart: always
+        networks:
+          - default
 
-redis:
-    build: ./redis
-    ports:
-      - "6379:6379"
-    restart: always
+    redis:
+        build: ./redis
+        ports:
+          - "6379:6379"
+        restart: always
+        networks:
+          - default
 
-php73:
-    build: ./php
-    expose:
-      - "9000"
-    volumes:
-      - ./wwwroot/:/var/www/html/:rw
-      - ./php/php.ini:/usr/local/etc/php/php.ini:ro
-      - ./php/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf:rw
-      - ./php/log/php-fpm/:/var/log/php-fpm/:rw
-    links:
-      - "mysql"
-      - "redis"
-    restart: always
+    php73:
+        build: ./php
+        expose:
+          - "9000"
+        volumes:
+          - ./wwwroot/:/var/www/html/:rw
+          - ./php/php.ini:/usr/local/etc/php/php.ini:ro
+          - ./php/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf:rw
+          - ./php/log/php-fpm/:/var/log/php-fpm/:rw
+        links:
+          - "mysql"
+          - "redis"
+        restart: always
+        networks:
+          - default
 
-nginx:
-    build: ./nginx
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./wwwroot/:/var/www/html/:rw
-    links:
-      - "php73"
-    restart: always
+    nginx:
+        build: ./nginx
+        ports:
+          - "80:80"
+          - "443:443"
+        volumes:
+          - ./wwwroot/:/var/www/html/:rw
+        links:
+          - "php73"
+        restart: always
+        networks:
+          - default
 
+networks:
+  default:
