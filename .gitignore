@@ -1,4 +1,6 @@
 mysql/data/
 wwwroot/*
+!wwwroot/50x.html
+!wwwroot/index.php
 !wwwroot/test.com/index.php
 !wwwroot/test.com/public/index.php
