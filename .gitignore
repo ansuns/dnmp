@@ -1,3 +1,4 @@
 mysql/data/
 wwwroot/*
-!wwwroot/test.com/
+!wwwroot/test.com/index.php
+!wwwroot/test.com/public/index.php
