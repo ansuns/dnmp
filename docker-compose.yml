@@ -40,7 +40,7 @@ services:
           - "443:443"
         volumes:
           - ./wwwroot/:/var/www/html/:rw
-	  - ./nginx/log:/var/log/nginx/:rw
+          - ./nginx/log:/var/log/nginx/:rw
         links:
           - "php73"
         restart: always
