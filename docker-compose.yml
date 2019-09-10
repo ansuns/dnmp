@@ -25,7 +25,7 @@ services:
           - ./wwwroot/:/var/www/html/:rw
           - ./php/php.ini:/usr/local/etc/php/php.ini:ro
           - ./php/php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf:rw
-          - ./php/log/php-fpm/:/var/log/php-fpm/:rw
+          - ./php/log/:/var/log/php
         links:
           - "mysql"
           - "redis"
@@ -40,6 +40,7 @@ services:
           - "443:443"
         volumes:
           - ./wwwroot/:/var/www/html/:rw
+	  - ./nginx/log:/var/log/nginx/:rw
         links:
           - "php73"
         restart: always
